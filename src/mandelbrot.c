@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 14:20:13 by stelim            #+#    #+#             */
-/*   Updated: 2026/04/26 15:29:51 by stelim           ###   ########.fr       */
+/*   Updated: 2026/04/26 20:41:59 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 unsigned int	mandelbrot_rgb(int iter, double radius)
 {
-	unsigned int x;
+	double x;
 
-	if (radius < 2)
+	if (radius <= 2)
 		x = 0;
 	else
-		x = iter*1000 + 1 - log(log(radius) / log(2));
+		x = (1 << 8) * (iter + 1) - log(log(radius) / log(2)) / log(2);
 	return (x);
 }
 
