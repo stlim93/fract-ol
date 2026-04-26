@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 11:45:51 by stelim            #+#    #+#             */
-/*   Updated: 2026/04/26 11:45:51 by stelim           ###   ########.fr       */
+/*   Updated: 2026/04/26 21:02:06 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_close(t_data *data)
 
 int	ft_keypress(int keycode, t_data *data)
 {
-	if (keycode == 0xff1b)
+	if (keycode == XK_Escape)
 		ft_close(data);
 	return(0);
 }
