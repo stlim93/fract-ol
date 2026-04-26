@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/04/19 14:01:25 by stelim           ###   ########.fr       */
+/*   Updated: 2026/04/26 15:22:38 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@
 # include <X11/keysymdef.h>
 # include <X11/X.h>
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1200
+# define HEIGHT 800
+# define MAX_ITER 100
+# define ESCAPE_RADIUS 4
 
 typedef struct s_data
 {
@@ -33,14 +35,14 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
-void	pixel_to_image(t_data *data, int x, int y, int color)
-{
-	int	pixel_offset;
-	int	bytes_per_pixel;
+// From mandelbrot.c
+unsigned int	generate_mandelbrot_point(double x, double y, int iteration);
 
-	bytes_per_pixel = data->bits_per_pixel / 8;
-	pixel_offset = (y * data->size_line) + (x + bytes_per_pixel);
-	*(unsigned int *)(data->img_data + pixel_offset) = color;
-}
+// From keyevents.c
+int	ft_close(t_data *data);
+int	ft_keypress(int keycode, t_data *data);
+
+// From mlx_helper.c
+void	pixel_to_image(t_data *data, int x, int y, int color);
 
 #endif
