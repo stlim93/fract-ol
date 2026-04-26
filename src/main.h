@@ -6,23 +6,24 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/04/26 15:22:38 by stelim           ###   ########.fr       */
+/*   Updated: 2026/04/26 20:55:10 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
 
+# define XK_MISCELLANY
 # include "../minilibx-linux/mlx.h"
 # include <stdlib.h>
 # include <math.h>
 # include <X11/keysymdef.h>
 # include <X11/X.h>
 
-# define WIDTH 1200
+# define WIDTH 800
 # define HEIGHT 800
-# define MAX_ITER 100
-# define ESCAPE_RADIUS 4
+# define MAX_ITER 500
+# define BAILOUT_RADIUS 1000
 
 typedef struct s_data
 {
