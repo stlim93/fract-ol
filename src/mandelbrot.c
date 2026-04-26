@@ -6,40 +6,42 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 14:20:13 by stelim            #+#    #+#             */
-/*   Updated: 2026/04/19 16:46:52 by stelim           ###   ########.fr       */
+/*   Updated: 2026/04/26 15:29:51 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include <stdio.h>
-// z(n) = z(n-1)^2+c, c = x+iy;
-// >> z(1) = z(0)^2 + x+iy; z(0) = x+iy; z(1) = x^2 + 2xyi+y^2 + x + iy;
-// >> z(1) = x^2+y^2 + x + i(2x+1)y;
 
-double generate_mandelbrot_point(double x, double y, int iteration)
+unsigned int	mandelbrot_rgb(int iter, double radius)
+{
+	unsigned int x;
+
+	if (radius < 2)
+		x = 0;
+	else
+		x = iter*1000 + 1 - log(log(radius) / log(2));
+	return (x);
+}
+
+unsigned int	generate_mandelbrot_point(double x, double y, int iteration)
 {
 	int		iter;
 	double	re;
 	double	im;
 	double	radius;
+	double	re_temp;
 
 	iter = 0;
 	re = x;
 	im = y;
-	radius = re*re + im*im;
-	while (iter < iteration && fabs(radius) < 4)
+	while (iter < iteration && pow(re, 2) + pow(im, 2) < 4)
 	{
-		re = re*re - im*im + x;
+		re_temp = re*re - im*im + x;
 		im = 2 * (re*im) + y;
-		radius = re*re + im*im;
+		re = re_temp;
 		iter++;
 	}
-	return (radius);
-}
-
-int main(void)
-{
-	double x = sqrt(generate_mandelbrot_point(0.1, 0, 100));
-	
-	printf("%f\n", x);
+	radius = re * re + im * im;
+	return (mandelbrot_rgb(iter, fabs(radius)));
 }
