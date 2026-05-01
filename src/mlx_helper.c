@@ -22,8 +22,3 @@ void	pixel_to_image(t_data *data, int x, int y, int color)
 	*(unsigned int *)(data->img_data + pixel_offset) = color;
 }
 
-unsigned int	create_trgb(int x)
-{
-	return (x);
-}
-
