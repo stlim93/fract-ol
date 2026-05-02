@@ -6,7 +6,7 @@ SRC_DIR		= src
 OBJ_DIR		= obj
 MLX_DIR		= ./minilibx-linux
 
-SRCS		= $(SRC_DIR)/main.c
+SRCS		= $(SRC_DIR)/*.c
 OBJS		= $(SRCS:$(SRC_DIR)/%.o=$(OBJ_DIR)/%.c)
 
 # wtf is this?
@@ -16,4 +16,7 @@ INCLUDES	= -I$(MLX_DIR)
 all : $(NAME)
 
 $(NAME) : $(OBJ_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) -L. -lft -o $(NAME)
+
+clean:
+	rm $(NAME)
