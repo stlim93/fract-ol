@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/01 15:55:26 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/02 17:02:05 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void			ft_output_mandelbrot(t_data data);
 
 // From julia.c
 unsigned int	generate_julia_point(double x, double y, double cx, double cy, int iteration);
+void			ft_output_julia(t_data data, double cx, double cy);
 
 // From keyevents.c
 int	ft_close(t_data *data);
@@ -67,6 +68,9 @@ int	ft_keypress(int keycode, t_data *data);
 void	pixel_to_image(t_data *data, int x, int y, int color);
 
 // From mouse_events.c
-int		ft_mouse_zoom(int keycode, t_data *data);
+int		ft_mouse_zoom(int keycode, t_data *data, t_fractal *fractal);
+
+// From atof.c
+double	ft_atof(char *s);
 
 #endif
