@@ -6,12 +6,11 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 16:20:19 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/01 16:25:26 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/02 13:57:39 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/main.h"
-#include <stdio.h>
+#include "main.h"
 
 static	double	ft_integer_part(char *s)
 {
@@ -73,13 +72,15 @@ double	ft_atof(char *s)
 	if (!(s[pos] >= '0' && s[pos] <= '9'))
 	{
 		perror("Input error: Not double format");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
-	result = ft_integer_part(&(s[pos])) + ft_decimal_part(&(s[pos]));
+	result = ft_integer_part(&(s[pos]));
+	if (ft_strchr(s, '.') != NULL)
+		result += ft_decimal_part(&(s[pos]));
 	return (result * sign);
 }
 
-int	main(int argc, char *argv[])
-{
-	printf("%f\n", ft_atof(argv[1]));
-}
+// int	main(int argc, char *argv[])
+// {
+// 	printf("%.6lf\n", ft_atof(argv[1]));
+// }
