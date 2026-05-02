@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/01 14:14:59 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/01 15:49:29 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/02 13:30:13 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 // Button4 - Zoom in
 // Button5 - Zoom out
 
-int	ft_mouse_zoom(int keycode, t_data *data)
+int	ft_mouse_zoom(int keycode, t_data *data, t_fractal *fractal)
 {
 	if (keycode == Button4)
+	{
+		(*fractal).min_x *= 0.9;
+		(*fractal).max_x *= 0.9;
+		(*fractal).min_y *= 0.9;
+		(*fractal).max_y *= 0.9;
 		ft_output_mandelbrot(*data);
+	}
 	return (0);
 }

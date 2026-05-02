@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/19 14:20:13 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/02 17:59:30 by stelim           ###   ########.fr       */
+/*   Created: 2026/04/26 16:01:43 by stelim            #+#    #+#             */
+/*   Updated: 2026/05/02 15:21:29 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
-#include <stdio.h>
 
-unsigned int	mandelbrot_rgb(int iter, double radius)
+unsigned int	julia_rgb(int iter, double radius)
 {
-	double	x;
+	double x;
 
 	if (radius <= 2)
 		x = 0;
 	else
-	{
-		x = (iter) - log(log(radius) / log(BAILOUT_RADIUS)) / log(2);
-	}
+		x = (1 << 8) * (iter + 1) - log(log(radius) / log(2)) / log(2);
 	return (x);
 }
 
-unsigned int	generate_mandelbrot_point(double x, double y, int iteration)
+unsigned int	generate_julia_point(double x, double y, double cx, double cy, int iteration)
 {
 	int		iter;
 	double	re;
@@ -39,16 +36,16 @@ unsigned int	generate_mandelbrot_point(double x, double y, int iteration)
 	im = y;
 	while (iter < iteration && pow(re, 2) + pow(im, 2) < 4)
 	{
-		re_temp = re*re - im*im + x;
-		im = 2 * (re*im) + y;
+		re_temp = re*re - im*im + cx;
+		im = 2 * (re*im) + cy;
 		re = re_temp;
 		iter++;
 	}
-	radius = sqrt(pow(re, 2) + pow(im, 2));
-	return (mandelbrot_rgb(iter,radius));
+	radius = pow(re, 2) + pow(im, 2);
+	return (julia_rgb(iter, sqrt(radius)));
 }
 
-void	ft_init_mandelbrot(t_fractal *mdb)
+void	ft_init_julia(t_fractal *mdb)
 {
 	(*mdb).min_x = -2;
 	(*mdb).max_x = 2;
@@ -59,7 +56,7 @@ void	ft_init_mandelbrot(t_fractal *mdb)
 	(*mdb).const_y = 0;
 }
 
-void	ft_output_mandelbrot(t_data data)
+void	ft_output_julia(t_data data, double cx, double cy)
 {
 	t_fractal	mdb;
 	double	pos_y;
@@ -68,7 +65,7 @@ void	ft_output_mandelbrot(t_data data)
 	double	scaled_y;
 	double	colour;
 	
-	ft_init_mandelbrot(&mdb);
+	ft_init_julia(&mdb);
 	pos_y=0;
 	while (pos_y < HEIGHT)
 	{
@@ -77,7 +74,7 @@ void	ft_output_mandelbrot(t_data data)
 		{
 			scaled_x = (double) pos_x * (mdb.max_x - mdb.min_x) / WIDTH - 2;
 			scaled_y = - ((double) pos_y * (mdb.max_y - mdb.min_y) / HEIGHT) + 2;
-			colour = generate_mandelbrot_point(scaled_x, scaled_y, MAX_ITER);
+			colour = generate_julia_point(scaled_x, scaled_y, cx, cy, MAX_ITER);
 			pixel_to_image(&data, pos_x * data.size_line / WIDTH, pos_y, colour);
 			pos_x++;
 		}
