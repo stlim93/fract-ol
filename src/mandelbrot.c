@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 14:20:13 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/03 18:29:43 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/04 00:42:49 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_init_mandelbrot(t_data *data)
 	(*data).max_x = 2.0;
 	(*data).min_y = -2.0;
 	(*data).max_y = 2.0;
-	(*data).zoom = 1.0;
+	(*data).zoom = 0.05;
 	(*data).const_x = 0.0;
 	(*data).const_y = 0.0;
 }
@@ -74,15 +74,15 @@ static int ft_put_mandelbrot_to_window(t_data *data)
 		pos_x = 0;
 		while (pos_x < WIDTH)
 		{
-			scaled_x = (double) pos_x * ((*data).max_x - (*data).min_x) / WIDTH + (*data).min_x;
-			scaled_y = - ((double) pos_y * ((*data).max_y - (*data).min_y) / HEIGHT) + (*data).max_y;
+			scaled_x = (double) pos_x * ((*data).max_x - (*data).min_x) / (WIDTH - 1) + (*data).min_x;
+			scaled_y = - ((double) pos_y * ((*data).max_y - (*data).min_y) / (HEIGHT - 1)) + (*data).max_y;
 			colour = generate_mandelbrot_point(scaled_x, scaled_y, MAX_ITER);
 			pixel_to_image(&(*data), pos_x * (*data).size_line / WIDTH, pos_y, colour);
 			pos_x++;
 		}
 		pos_y++;
 	}
-	// mlx_clear_window((*data).mlx_ptr, (*data).win_ptr);
+	mlx_clear_window((*data).mlx_ptr, (*data).win_ptr);
 	mlx_put_image_to_window((*data).mlx_ptr, (*data).win_ptr, (*data).img_ptr, 0, 0);
 	return (0);
 }
@@ -92,5 +92,5 @@ void	ft_output_mandelbrot(t_data *data)
 	ft_init_mandelbrot(data);
 	ft_put_mandelbrot_to_window(data);
 	mlx_hook((*data).win_ptr, ButtonPress, ButtonPressMask, &ft_buttonpress, data);
-	// mlx_loop_hook(data.mlx_ptr, ft_put_mandelbrot_to_window, &data);
+	mlx_loop_hook(data->mlx_ptr, ft_put_mandelbrot_to_window, data);
 }

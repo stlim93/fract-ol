@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 11:45:51 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/03 18:27:59 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/04 00:50:59 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+static void ft_update_parameters(int dir, int x, int y, t_data *data)
+{
+	double	coord;
+	double	old_range;
+	double	new_range;
+	double	scale;
+
+	scale = 1 - (*data).zoom;
+	if (dir == -1)
+		scale = 1/scale;
+	old_range = (*data).max_x - (*data).min_x;
+	coord = x * old_range / (WIDTH - 1) + (*data).min_x;
+	// printf("coord x = %.15f ", coord);
+	new_range = scale * old_range;
+	(*data).min_x = coord - (coord - (*data).min_x) / old_range * new_range;
+	(*data).max_x = (*data).min_x + new_range;
+	old_range = (*data).max_y - (*data).min_y;
+	coord = (*data).max_y - y * old_range / (HEIGHT - 1);
+	// printf("coord y = %.15f\n", coord);
+	new_range = scale * old_range;
+	(*data).max_y = coord - (coord - (*data).max_y) / old_range * new_range;
+	(*data).min_y = (*data).max_y - new_range;
+}
 
 int	ft_close(t_data *data)
 {
@@ -34,14 +58,14 @@ int	ft_keypress(int keycode, t_data *data)
 {
 	if (keycode == XK_Escape)
 		ft_close(data);
-	// else if (keycode == XK_equal)
-	// {
-	// 	printf("Zoom in via + sign\n");
-	// }
-	// else if (keycode == XK_minus)
-	// {
-	// 	printf("Zoom out via - sign\n");
-	// }
+	else if (keycode == XK_equal)
+	{
+		printf("Zoom in via + sign\n");
+	}
+	else if (keycode == XK_minus)
+	{
+		printf("Zoom out via - sign\n");
+	}
 	else
 		ft_keypress2(keycode, data);
 	return(0);
@@ -49,9 +73,6 @@ int	ft_keypress(int keycode, t_data *data)
 
 int	ft_keypress2(int keycode, t_data *data)
 {
-	t_data x;
-
-	x = *data;
 	if (keycode == XK_Up)
 	{
 		printf("Move up via up arrow key\n");
@@ -77,20 +98,8 @@ int	ft_buttonpress(int buttoncode, int x, int y, t_data *data)
 	(void) y;
 
 	if (buttoncode == Button4)
-	{
-		printf("Scroll up = zoom in\n");
-		if ((*data).zoom <= 0.00001)
-			(*data).zoom = 0.00001;
-		else
-			(*data).zoom *= 0.95;
-	}
+		ft_update_parameters(1, x, y, data);
 	else if (buttoncode == Button5)
-	{
-		printf("Scroll down = zoom out\n");
-		if ((*data).zoom >= 1.2)
-			(*data).zoom = 1.2;
-		else
-			(*data).zoom /= 0.95;
-	}
+		ft_update_parameters(-1, x, y, data);
 	return (0);
 }
