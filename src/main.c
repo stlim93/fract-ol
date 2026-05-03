@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:04:53 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/02 18:01:25 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/03 17:52:01 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	main(int argc, char *argv[])
 	data.img_data = mlx_get_data_addr(data.img_ptr, &data.bits_per_pixel, &data.size_line, &data.endian);
 
 	if (ft_strncmp(argv[1], "mandelbrot", 11) == 0)
-		ft_output_mandelbrot(data);
-	else if(ft_strncmp(argv[1], "julia", 6) == 0)
-	{
-		ft_output_julia(data, ft_atof(argv[2]), ft_atof(argv[3]));
-	}
+		ft_output_mandelbrot(&data);
+	// else if(ft_strncmp(argv[1], "julia", 6) == 0)
+	// {
+	// 	// ft_output_julia(data, ft_atof(argv[2]), ft_atof(argv[3]));
+	// }
 	else
 	{
 		ft_printf("error: Select julia or mandelbrot set");
@@ -47,11 +47,11 @@ int	main(int argc, char *argv[])
 	}
 
 	//  List of mouse and key actions
-	mlx_hook(data.win_ptr, 17, 1 << 17, &ft_close, &data);
+	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask, &ft_close, &data);
 	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &ft_keypress, &data);
+	mlx_hook(data.win_ptr, ButtonPress, ButtonPressMask, &ft_buttonpress, &data);
 	mlx_loop(data.mlx_ptr);
 
-	mlx_mouse_hook(data.win_ptr, &ft_mouse_zoom, &data);
 	return (0);
 }
 
