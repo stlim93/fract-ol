@@ -6,7 +6,7 @@
 /*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 14:20:13 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 00:42:49 by steve            ###   ########.fr       */
+/*   Updated: 2026/05/04 13:09:58 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,21 @@
 
 unsigned int	mandelbrot_rgb(int iter, double radius)
 {
-	// double	x;
+	double	x;
+	int		r;
+	int		g;
+	int		b;
 
 	if (radius <= 2)
-		return (0); //x = 0;
-	// else
-	// {
-	// 	x = (iter) - log(log(radius) / log(BAILOUT_RADIUS)) / log(2);
-	// }
-	return (iter << 16 | iter << 8 | iter);
+		x = M_PI;
+	else
+	{
+		x = (iter) - log(log(radius) / log(2)) / log(2);
+	}
+	r = (int)(sin(1.0 / 3.0 * x) * 127 + 128);
+	g = (int)(sin(1.0 / 3.0 * x + 2.0/3.0 * M_PI) * 127 + 128);
+	b = (int)(sin(1.0 / 3.0 * x + 4.0/3.0 * M_PI) * 127 + 128);
+	return (r << 16 | g << 8 | b);
 	// return (x);
 }
 
@@ -90,7 +96,7 @@ static int ft_put_mandelbrot_to_window(t_data *data)
 void	ft_output_mandelbrot(t_data *data)
 {
 	ft_init_mandelbrot(data);
-	ft_put_mandelbrot_to_window(data);
+	// ft_put_mandelbrot_to_window(data);
 	mlx_hook((*data).win_ptr, ButtonPress, ButtonPressMask, &ft_buttonpress, data);
 	mlx_loop_hook(data->mlx_ptr, ft_put_mandelbrot_to_window, data);
 }

@@ -6,7 +6,7 @@
 /*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/03 23:50:18 by steve            ###   ########.fr       */
+/*   Updated: 2026/05/04 13:11:42 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 # define WIDTH 800
 # define HEIGHT 800
-# define MAX_ITER 100
+# define MAX_ITER 150
 # define BAILOUT_RADIUS 1000
 
 typedef struct s_data
