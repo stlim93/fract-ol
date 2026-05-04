@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
+/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 14:20:13 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 13:09:58 by steve            ###   ########.fr       */
+/*   Updated: 2026/05/04 20:51:47 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,16 @@ unsigned int	mandelbrot_rgb(int iter, double radius)
 	int		g;
 	int		b;
 
-	if (radius <= 2)
-		x = M_PI;
+	if (radius < 2)
+		return (0x000000);
 	else
 	{
 		x = (iter) - log(log(radius) / log(2)) / log(2);
 	}
-	r = (int)(sin(1.0 / 3.0 * x) * 127 + 128);
-	g = (int)(sin(1.0 / 3.0 * x + 2.0/3.0 * M_PI) * 127 + 128);
-	b = (int)(sin(1.0 / 3.0 * x + 4.0/3.0 * M_PI) * 127 + 128);
+	r = (sin(1.0 / 3.0 * x) * 127 + 128);
+	g = (sin(1.0 / 3.0 * x + 2.0 / 3.0 * M_PI) * 127 + 128);
+	b = (sin(1.0 / 3.0 * x + 4.0 / 3.0 * M_PI) * 127 + 128);
 	return (r << 16 | g << 8 | b);
-	// return (x);
 }
 
 unsigned int	generate_mandelbrot_point(double x, double y, int iteration)
@@ -46,13 +45,13 @@ unsigned int	generate_mandelbrot_point(double x, double y, int iteration)
 	im = y;
 	while (iter < iteration && pow(re, 2) + pow(im, 2) < 4)
 	{
-		re_temp = re*re - im*im + x;
-		im = 2 * (re*im) + y;
+		re_temp = re * re - im * im + x;
+		im = 2 * (re * im) + y;
 		re = re_temp;
 		iter++;
 	}
 	radius = sqrt(pow(re, 2) + pow(im, 2));
-	return (mandelbrot_rgb(iter,radius));
+	return (mandelbrot_rgb(iter, radius));
 }
 
 void	ft_init_mandelbrot(t_data *data)
@@ -66,37 +65,41 @@ void	ft_init_mandelbrot(t_data *data)
 	(*data).const_y = 0.0;
 }
 
-static int ft_put_mandelbrot_to_window(t_data *data)
+int	ft_put_mandelbrot_to_window(t_data *data)
 {
 	double	pos_y;
 	double	pos_x;
 	double	scaled_x;
 	double	scaled_y;
 	double	colour;
-	
-	pos_y=0;
+
+	pos_y = 0;
 	while (pos_y < HEIGHT)
 	{
 		pos_x = 0;
 		while (pos_x < WIDTH)
 		{
-			scaled_x = (double) pos_x * ((*data).max_x - (*data).min_x) / (WIDTH - 1) + (*data).min_x;
-			scaled_y = - ((double) pos_y * ((*data).max_y - (*data).min_y) / (HEIGHT - 1)) + (*data).max_y;
+			scaled_x = pos_x * (MAX_X - MIN_X) / (WIDTH - 1) + MIN_X;
+			scaled_y = - (pos_y * (MAX_Y - MIN_Y) / (HEIGHT - 1)) + MAX_Y;
 			colour = generate_mandelbrot_point(scaled_x, scaled_y, MAX_ITER);
-			pixel_to_image(&(*data), pos_x * (*data).size_line / WIDTH, pos_y, colour);
+			pixel_to_image(data, pos_x * SIZE_LINE / WIDTH, pos_y, colour);
 			pos_x++;
 		}
 		pos_y++;
 	}
-	mlx_clear_window((*data).mlx_ptr, (*data).win_ptr);
-	mlx_put_image_to_window((*data).mlx_ptr, (*data).win_ptr, (*data).img_ptr, 0, 0);
+	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
 	return (0);
 }
 
 void	ft_output_mandelbrot(t_data *data)
 {
 	ft_init_mandelbrot(data);
-	// ft_put_mandelbrot_to_window(data);
-	mlx_hook((*data).win_ptr, ButtonPress, ButtonPressMask, &ft_buttonpress, data);
+	mlx_key_hook(data->win_ptr, ft_keypress, data);
+	mlx_mouse_hook(data->win_ptr, ft_buttonpress, data);
 	mlx_loop_hook(data->mlx_ptr, ft_put_mandelbrot_to_window, data);
 }
+
+// ft_put_mandelbrot_to_window(data);
+// mlx_hook((*data).win_ptr, ButtonPress,
+// ButtonPressMask, &ft_buttonpress, data);
+// mlx_loop_hook(data->mlx_ptr, ft_put_mandelbrot_to_window, data);
