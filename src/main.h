@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 21:13:01 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/05 00:01:56 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # include "../includes/get_next_line_bonus.h"
 # include "../includes/libft.h"
 
-# define WIDTH 800
-# define HEIGHT 800
-# define MAX_ITER 100
+# define WIDTH 600
+# define HEIGHT 600
+# define MAX_ITER 200
 # define MAX_X (*data).max_x
 # define MIN_X (*data).min_x
 # define MAX_Y (*data).max_y
@@ -61,7 +61,7 @@ typedef struct s_data
 }	t_data;
 
 // From mandelbrot.c
-unsigned int	generate_mandelbrot_point(double x, double y, int iteration);
+unsigned int	generate_mandelbrot_point(double x, double y);
 void			ft_output_mandelbrot(t_data *data);
 int				ft_put_mandelbrot_to_window(t_data *data);
 
@@ -71,16 +71,19 @@ int				ft_put_julia_to_window(t_data *data);
 void			ft_output_julia(t_data *data, double const_x, double const_y);
 
 // From keyevents.c
-int	ft_close(t_data *data);
-int	ft_keypress(int keycode, t_data *data);
-int	ft_keypress2(int keycode, t_data *data);
-int ft_buttonpress(int buttoncode, int x, int y, t_data *data);
+int				ft_close(t_data *data);
+int				ft_keypress(int keycode, t_data *data);
+int 			ft_buttonpress(int buttoncode, int x, int y, t_data *data);
+
+// From events_update.c
+void			ft_move(char c, t_data *data);
+void			ft_move2(char c, t_data *data);
 
 // From mlx_helper.c
-void	pixel_to_image(t_data *data, int x, int y, int color);
+void			pixel_to_image(t_data *data, int x, int y, int color);
 
 // From atof.c
-double	ft_atof(char *s);
+double			ft_atof(char *s);
 
 // From colour.c
 unsigned int	create_rgb(int iter, double radius);
