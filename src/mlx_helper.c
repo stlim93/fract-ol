@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 11:24:47 by stelim            #+#    #+#             */
-/*   Updated: 2026/04/26 11:24:47 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/05 00:05:36 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ void	pixel_to_image(t_data *data, int x, int y, int color)
 	pixel_offset = (y * data->size_line) + (x + bytes_per_pixel);
 	*(unsigned int *)(data->img_data + pixel_offset) = color;
 }
-
