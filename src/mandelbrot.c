@@ -6,31 +6,12 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 14:20:13 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 20:51:47 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/04 21:01:52 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include <stdio.h>
-
-unsigned int	mandelbrot_rgb(int iter, double radius)
-{
-	double	x;
-	int		r;
-	int		g;
-	int		b;
-
-	if (radius < 2)
-		return (0x000000);
-	else
-	{
-		x = (iter) - log(log(radius) / log(2)) / log(2);
-	}
-	r = (sin(1.0 / 3.0 * x) * 127 + 128);
-	g = (sin(1.0 / 3.0 * x + 2.0 / 3.0 * M_PI) * 127 + 128);
-	b = (sin(1.0 / 3.0 * x + 4.0 / 3.0 * M_PI) * 127 + 128);
-	return (r << 16 | g << 8 | b);
-}
 
 unsigned int	generate_mandelbrot_point(double x, double y, int iteration)
 {
@@ -51,7 +32,7 @@ unsigned int	generate_mandelbrot_point(double x, double y, int iteration)
 		iter++;
 	}
 	radius = sqrt(pow(re, 2) + pow(im, 2));
-	return (mandelbrot_rgb(iter, radius));
+	return (create_rgb(iter, radius));
 }
 
 void	ft_init_mandelbrot(t_data *data)
