@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 14:20:13 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 21:01:52 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/04 22:57:50 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include <stdio.h>
 
-unsigned int	generate_mandelbrot_point(double x, double y, int iteration)
+unsigned int	generate_mandelbrot_point(double x, double y)
 {
 	int		iter;
 	double	re;
@@ -24,7 +24,7 @@ unsigned int	generate_mandelbrot_point(double x, double y, int iteration)
 	iter = 0;
 	re = x;
 	im = y;
-	while (iter < iteration && pow(re, 2) + pow(im, 2) < 4)
+	while (iter < MAX_ITER && pow(re, 2) + pow(im, 2) < 4)
 	{
 		re_temp = re * re - im * im + x;
 		im = 2 * (re * im) + y;
@@ -62,7 +62,7 @@ int	ft_put_mandelbrot_to_window(t_data *data)
 		{
 			scaled_x = pos_x * (MAX_X - MIN_X) / (WIDTH - 1) + MIN_X;
 			scaled_y = - (pos_y * (MAX_Y - MIN_Y) / (HEIGHT - 1)) + MAX_Y;
-			colour = generate_mandelbrot_point(scaled_x, scaled_y, MAX_ITER);
+			colour = generate_mandelbrot_point(scaled_x, scaled_y);
 			pixel_to_image(data, pos_x * SIZE_LINE / WIDTH, pos_y, colour);
 			pos_x++;
 		}

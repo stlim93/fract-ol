@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:01:43 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 21:13:12 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/04 23:03:18 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_init_julia(t_data *data, double const_x, double const_y)
 	(*data).max_x = 2;
 	(*data).min_y = -2;
 	(*data).max_y = 2;
+	(*data).zoom = 0.05;
 	(*data).const_x = const_x;
 	(*data).const_y = const_y;
 }
@@ -74,7 +75,7 @@ int	ft_put_julia_to_window(t_data *data)
 void	ft_output_julia(t_data *data, double const_x, double const_y)
 {
 	ft_init_julia(data, const_x, const_y);
-	mlx_key_hook(WIN, ft_keypress, data);
-	mlx_mouse_hook(WIN, ft_buttonpress, data);
-	mlx_loop_hook(MLX, ft_put_julia_to_window, data);
+	mlx_key_hook(WIN, &ft_keypress, data);
+	mlx_mouse_hook(WIN, &ft_buttonpress, data);
+	mlx_loop_hook(MLX, &ft_put_julia_to_window, data);
 }
