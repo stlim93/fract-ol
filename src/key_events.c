@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 11:45:51 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 21:00:42 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/04 23:48:28 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,34 +62,19 @@ int	ft_keypress(int keycode, t_data *data)
 		ft_update_parameters(1, WIDTH / 2, HEIGHT / 2, data);
 	else if (keycode == XK_minus)
 		ft_update_parameters(-1, WIDTH / 2, HEIGHT / 2, data);
-	else
-		ft_keypress2(keycode, data);
-	return (0);
-}
-
-int	ft_keypress2(int keycode, t_data *data)
-{
-	t_data	*x;
-
-	x = data;
-	if (keycode == XK_Up)
-	{
-		printf("Move up via down arrow key\n");
-	}
+	else if (keycode == XK_Up)
+		ft_move('U', data);
 	else if (keycode == XK_Down)
-	{
-		printf("Move down via down arrow key\n");
-	}
+		ft_move('D', data);
 	else if (keycode == XK_Left)
-	{
-		printf("Move left via left arrow key\n");
-	}
+		ft_move('L', data);
 	else if (keycode == XK_Right)
-	{
-		printf("Move right via right arrow key\n");
-	}
+		ft_move('R', data);
+	else if (keycode == XK_c)
+		ft_move('C', data);
 	return (0);
 }
+
 
 int	ft_buttonpress(int buttoncode, int x, int y, t_data *data)
 {
