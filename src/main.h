@@ -6,7 +6,7 @@
 /*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/05 00:01:56 by steve            ###   ########.fr       */
+/*   Updated: 2026/05/05 00:03:08 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			ft_output_julia(t_data *data, double const_x, double const_y);
 // From keyevents.c
 int				ft_close(t_data *data);
 int				ft_keypress(int keycode, t_data *data);
-int 			ft_buttonpress(int buttoncode, int x, int y, t_data *data);
+int				ft_buttonpress(int buttoncode, int x, int y, t_data *data);
 
 // From events_update.c
 void			ft_move(char c, t_data *data);
