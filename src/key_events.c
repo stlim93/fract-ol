@@ -6,7 +6,7 @@
 /*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 11:45:51 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 23:48:28 by steve            ###   ########.fr       */
+/*   Updated: 2026/05/05 00:04:14 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	ft_keypress(int keycode, t_data *data)
 		ft_move('C', data);
 	return (0);
 }
-
 
 int	ft_buttonpress(int buttoncode, int x, int y, t_data *data)
 {
