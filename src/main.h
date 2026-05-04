@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 20:49:39 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/04 21:13:01 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 # define MLX (*data).mlx_ptr
 # define WIN (*data).win_ptr
 # define IMG (*data).img_ptr
+# define CONST_X (*data).const_x
+# define CONST_Y (*data).const_y
 
 typedef struct s_data
 {
@@ -64,8 +66,9 @@ void			ft_output_mandelbrot(t_data *data);
 int				ft_put_mandelbrot_to_window(t_data *data);
 
 // From julia.c
-unsigned int	generate_julia_point(double x, double y, double cx, double cy, int iteration);
-void			ft_output_julia(t_data data, double cx, double cy);
+unsigned int	generate_julia_point(double x, double y, double cx, double cy);
+int				ft_put_julia_to_window(t_data *data);
+void			ft_output_julia(t_data *data, double const_x, double const_y);
 
 // From keyevents.c
 int	ft_close(t_data *data);
@@ -78,5 +81,8 @@ void	pixel_to_image(t_data *data, int x, int y, int color);
 
 // From atof.c
 double	ft_atof(char *s);
+
+// From colour.c
+unsigned int	create_rgb(int iter, double radius);
 
 #endif
