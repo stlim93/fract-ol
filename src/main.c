@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:04:53 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/03 17:52:01 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/04 21:10:33 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,18 @@ int	main(int argc, char *argv[])
 
 	if (ft_strncmp(argv[1], "mandelbrot", 11) == 0)
 		ft_output_mandelbrot(&data);
-	// else if(ft_strncmp(argv[1], "julia", 6) == 0)
-	// {
-	// 	// ft_output_julia(data, ft_atof(argv[2]), ft_atof(argv[3]));
-	// }
+	else if(ft_strncmp(argv[1], "julia", 6) == 0)
+	{
+		ft_output_julia(&data, ft_atof(argv[2]), ft_atof(argv[3]));
+	}
 	else
 	{
 		ft_printf("error: Select julia or mandelbrot set");
 		exit(EXIT_FAILURE);
 	}
 
-	//  List of mouse and key actions
 	mlx_hook(data.win_ptr, DestroyNotify, StructureNotifyMask, &ft_close, &data);
-	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, &ft_keypress, &data);
-	mlx_hook(data.win_ptr, ButtonPress, ButtonPressMask, &ft_buttonpress, &data);
 	mlx_loop(data.mlx_ptr);
-
 	return (0);
 }
 
