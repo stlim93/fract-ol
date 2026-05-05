@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/05 20:17:51 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/05 21:01:17 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_data
 }	t_data;
 
 // From mandelbrot.c
-unsigned int	generate_mandelbrot_point(double x, double y);
+unsigned int	ft_mandelbrot_point(double x, double y);
 void			ft_output_mandelbrot(t_data *data);
 int				ft_put_mandelbrot_to_window(t_data *data);
 
@@ -59,6 +59,11 @@ int				ft_put_mandelbrot_to_window(t_data *data);
 unsigned int	ft_julia_point(double x, double y, double cx, double cy);
 int				ft_put_julia_to_window(t_data *data);
 void			ft_output_julia(t_data *data, double const_x, double const_y);
+
+// From mandelbar.c
+unsigned int	ft_mandelbar_point(double x, double y);
+void			ft_output_mandelbar(t_data *data);
+int				ft_put_mandelbar_to_window(t_data *data);
 
 // From keyevents.c
 int				ft_close(t_data *data);

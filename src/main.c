@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:04:53 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/05 20:23:13 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/05 21:00:34 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ int	main(int argc, char *argv[])
 	d = ft_init_mlx();
 	if (ft_strncmp(argv[1], "mandelbrot", 11) == 0 && argc == 2)
 		ft_output_mandelbrot(&d);
+	else if (ft_strncmp(argv[1], "mandelbar", 10) == 0 && argc == 2)
+		ft_output_mandelbar(&d);
+	else if (ft_strncmp(argv[1], "tricorn", 8) == 0 && argc == 2)
+		ft_output_mandelbar(&d);
 	else if (ft_strncmp(argv[1], "julia", 6) == 0 && argc == 4)
 		ft_output_julia(&d, ft_atof(argv[2]), ft_atof(argv[3]));
 	else
