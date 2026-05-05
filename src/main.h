@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/05 19:52:26 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/05 20:17:51 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_data
 	void	*win_ptr;
 	void	*img_ptr;
 	char	*img_data;
-	int		bits_per_pixel;
+	int		bpp;
 	int		size_line;
 	int		endian;
 	double	min_x;
