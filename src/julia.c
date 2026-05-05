@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:01:43 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/05 19:53:27 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/05 22:01:18 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_put_julia_to_window(t_data *d)
 		{
 			s_x = pos_x * ((*d).max_x - (*d).min_x) / (WIDTH - 1);
 			s_x += (*d).min_x;
-			s_y = -pos_y * ((*d).max_y - (*d).max_y) / (HEIGHT - 1);
+			s_y = -pos_y * ((*d).max_y - (*d).min_y) / (HEIGHT - 1);
 			s_y += (*d).max_y;
 			colour = ft_julia_point(s_x, s_y, (*d).const_x, (*d).const_y);
 			pixel_to_image(d, pos_x * (*d).size_line / WIDTH, pos_y, colour);
