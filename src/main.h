@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
+/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:02:42 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/05 00:03:08 by steve            ###   ########.fr       */
+/*   Updated: 2026/05/05 19:52:26 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,7 @@
 
 # define WIDTH 600
 # define HEIGHT 600
-# define MAX_ITER 200
-# define MAX_X (*data).max_x
-# define MIN_X (*data).min_x
-# define MAX_Y (*data).max_y
-# define MIN_Y (*data).min_y
-# define SIZE_LINE (*data).size_line
-# define MLX (*data).mlx_ptr
-# define WIN (*data).win_ptr
-# define IMG (*data).img_ptr
-# define CONST_X (*data).const_x
-# define CONST_Y (*data).const_y
+# define MAX_ITER 50
 
 typedef struct s_data
 {
@@ -66,7 +56,7 @@ void			ft_output_mandelbrot(t_data *data);
 int				ft_put_mandelbrot_to_window(t_data *data);
 
 // From julia.c
-unsigned int	generate_julia_point(double x, double y, double cx, double cy);
+unsigned int	ft_julia_point(double x, double y, double cx, double cy);
 int				ft_put_julia_to_window(t_data *data);
 void			ft_output_julia(t_data *data, double const_x, double const_y);
 

@@ -3,49 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   events_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
+/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 23:22:16 by steve             #+#    #+#             */
-/*   Updated: 2026/05/05 00:17:45 by steve            ###   ########.fr       */
+/*   Updated: 2026/05/05 19:56:16 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	ft_move(char c, t_data *data)
+void	ft_move(char c, t_data *d)
 {
 	double	offset_x;
 	double	offset_y;
-    int     direction;
+	int		direction;
 
-	offset_x  = (MAX_X - MIN_X) / 20;
-	offset_y  = (MAX_Y - MIN_Y) / 20;
-    direction = 1;
-    if (c == 'D' || c == 'L')
-    { 
-        direction = -1;
-    }
+	offset_x = ((*d).max_x - (*d).min_x) / 20;
+	offset_y = ((*d).max_y - (*d).min_y) / 20;
+	direction = 1;
+	if (c == 'D' || c == 'L')
+	{
+		direction = -1;
+	}
 	if (c == 'U' || c == 'D')
 	{
-		MAX_Y = MAX_Y + direction * offset_y;
-		MIN_Y = MIN_Y + direction * offset_y;	
+		(*d).max_y += direction * offset_y;
+		(*d).min_y += direction * offset_y;
 	}
 	else if (c == 'L' || c == 'R')
 	{
-		MAX_X = MAX_X + direction * offset_x;
-		MIN_X = MIN_X + direction * offset_x;	
+		(*d).max_x += direction * offset_x;
+		(*d).min_x += direction * offset_x;
 	}
-	else 
-        ft_move2(c, data);
+	else
+		ft_move2(c, d);
 }
 
-void    ft_move2(char c, t_data *data)
+void	ft_move2(char c, t_data *d)
 {
-    if (c == 'C')
-    {
-        MAX_X = 2;
-        MIN_X = -2;
-        MAX_Y = 2;
-        MIN_Y = -2;
-    }
+	if (c == 'C')
+	{
+		(*d).max_x = 2;
+		(*d).min_x = -2;
+		(*d).max_y = 2;
+		(*d).min_y = -2;
+	}
 }

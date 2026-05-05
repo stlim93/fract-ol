@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mandelbrot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
+/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/19 14:20:13 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 22:57:50 by steve            ###   ########.fr       */
+/*   Updated: 2026/05/05 19:53:26 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ unsigned int	generate_mandelbrot_point(double x, double y)
 	return (create_rgb(iter, radius));
 }
 
-void	ft_init_mandelbrot(t_data *data)
+void	ft_init_mandelbrot(t_data *d)
 {
-	(*data).min_x = -2.0;
-	(*data).max_x = 2.0;
-	(*data).min_y = -2.0;
-	(*data).max_y = 2.0;
-	(*data).zoom = 0.05;
-	(*data).const_x = 0.0;
-	(*data).const_y = 0.0;
+	(*d).min_x = -2.0;
+	(*d).max_x = 2.0;
+	(*d).min_y = -2.0;
+	(*d).max_y = 2.0;
+	(*d).zoom = 0.05;
+	(*d).const_x = 0.0;
+	(*d).const_y = 0.0;
 }
 
-int	ft_put_mandelbrot_to_window(t_data *data)
+int	ft_put_mandelbrot_to_window(t_data *d)
 {
 	double	pos_y;
 	double	pos_x;
-	double	scaled_x;
-	double	scaled_y;
+	double	s_x;
+	double	s_y;
 	double	colour;
 
 	pos_y = 0;
@@ -60,27 +60,29 @@ int	ft_put_mandelbrot_to_window(t_data *data)
 		pos_x = 0;
 		while (pos_x < WIDTH)
 		{
-			scaled_x = pos_x * (MAX_X - MIN_X) / (WIDTH - 1) + MIN_X;
-			scaled_y = - (pos_y * (MAX_Y - MIN_Y) / (HEIGHT - 1)) + MAX_Y;
-			colour = generate_mandelbrot_point(scaled_x, scaled_y);
-			pixel_to_image(data, pos_x * SIZE_LINE / WIDTH, pos_y, colour);
+			s_x = pos_x * ((*d).max_x - (*d).min_x) / (WIDTH - 1);
+			s_x += (*d).min_x;
+			s_y = - (pos_y * ((*d).max_y - (*d).min_y) / (HEIGHT - 1));
+			s_y += (*d).max_y;
+			colour = generate_mandelbrot_point(s_x, s_y);
+			pixel_to_image(d, pos_x * (*d).size_line / WIDTH, pos_y, colour);
 			pos_x++;
 		}
 		pos_y++;
 	}
-	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img_ptr, 0, 0);
 	return (0);
 }
 
-void	ft_output_mandelbrot(t_data *data)
+void	ft_output_mandelbrot(t_data *d)
 {
-	ft_init_mandelbrot(data);
-	mlx_key_hook(data->win_ptr, ft_keypress, data);
-	mlx_mouse_hook(data->win_ptr, ft_buttonpress, data);
-	mlx_loop_hook(data->mlx_ptr, ft_put_mandelbrot_to_window, data);
+	ft_init_mandelbrot(d);
+	mlx_key_hook(d->win_ptr, ft_keypress, d);
+	mlx_mouse_hook(d->win_ptr, ft_buttonpress, d);
+	mlx_loop_hook(d->mlx_ptr, ft_put_mandelbrot_to_window, d);
 }
 
 // ft_put_mandelbrot_to_window(data);
-// mlx_hook((*data).win_ptr, ButtonPress,
+// mlx_hook((*d).win_ptr, ButtonPress,
 // ButtonPressMask, &ft_buttonpress, data);
 // mlx_loop_hook(data->mlx_ptr, ft_put_mandelbrot_to_window, data);

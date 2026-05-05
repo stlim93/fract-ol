@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
+/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 16:01:43 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/04 23:03:18 by steve            ###   ########.fr       */
+/*   Updated: 2026/05/05 19:53:27 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-unsigned int	generate_julia_point(double x, double y, double cx, double cy)
+unsigned int	ft_julia_point(double x, double y, double cx, double cy)
 {
 	int		iter;
 	double	re;
@@ -34,23 +34,23 @@ unsigned int	generate_julia_point(double x, double y, double cx, double cy)
 	return (create_rgb(iter, sqrt(radius)));
 }
 
-void	ft_init_julia(t_data *data, double const_x, double const_y)
+void	ft_init_julia(t_data *d, double const_x, double const_y)
 {
-	(*data).min_x = -2;
-	(*data).max_x = 2;
-	(*data).min_y = -2;
-	(*data).max_y = 2;
-	(*data).zoom = 0.05;
-	(*data).const_x = const_x;
-	(*data).const_y = const_y;
+	(*d).min_x = -2;
+	(*d).max_x = 2;
+	(*d).min_y = -2;
+	(*d).max_y = 2;
+	(*d).zoom = 0.05;
+	(*d).const_x = const_x;
+	(*d).const_y = const_y;
 }
 
-int	ft_put_julia_to_window(t_data *data)
+int	ft_put_julia_to_window(t_data *d)
 {
 	double	pos_y;
 	double	pos_x;
-	double	scaled_x;
-	double	scaled_y;
+	double	s_x;
+	double	s_y;
 	double	colour;
 
 	pos_y = 0;
@@ -59,23 +59,25 @@ int	ft_put_julia_to_window(t_data *data)
 		pos_x = 0;
 		while (pos_x < WIDTH)
 		{
-			scaled_x = pos_x * (MAX_X - MIN_X) / (WIDTH - 1) + MIN_X;
-			scaled_y = -pos_y * (MAX_Y - MIN_Y) / (HEIGHT - 1) + MAX_Y;
-			colour = generate_julia_point(scaled_x, scaled_y, CONST_X, CONST_Y);
-			pixel_to_image(data, pos_x * SIZE_LINE / WIDTH, pos_y, colour);
+			s_x = pos_x * ((*d).max_x - (*d).min_x) / (WIDTH - 1);
+			s_x += (*d).min_x;
+			s_y = -pos_y * ((*d).max_y - (*d).max_y) / (HEIGHT - 1);
+			s_y += (*d).max_y;
+			colour = ft_julia_point(s_x, s_y, (*d).const_x, (*d).const_y);
+			pixel_to_image(d, pos_x * (*d).size_line / WIDTH, pos_y, colour);
 			pos_x++;
 		}
 		pos_y++;
 	}
-	mlx_clear_window(MLX, WIN);
-	mlx_put_image_to_window(MLX, WIN, IMG, 0, 0);
+	mlx_clear_window(d->mlx_ptr, d->win_ptr);
+	mlx_put_image_to_window(d->mlx_ptr, d->win_ptr, d->img_ptr, 0, 0);
 	return (0);
 }
 
-void	ft_output_julia(t_data *data, double const_x, double const_y)
+void	ft_output_julia(t_data *d, double const_x, double const_y)
 {
-	ft_init_julia(data, const_x, const_y);
-	mlx_key_hook(WIN, &ft_keypress, data);
-	mlx_mouse_hook(WIN, &ft_buttonpress, data);
-	mlx_loop_hook(MLX, &ft_put_julia_to_window, data);
+	ft_init_julia(d, const_x, const_y);
+	mlx_key_hook(d->win_ptr, &ft_keypress, d);
+	mlx_mouse_hook(d->win_ptr, &ft_buttonpress, d);
+	mlx_loop_hook(d->mlx_ptr, &ft_put_julia_to_window, d);
 }
