@@ -21,7 +21,7 @@ libft.a :
 minilibx-linux/libmlx.a :
 	make -C minilibx-linux
 
-$(NAME) : $(OBJ_DIR) $(OBJS)
+$(NAME) : libft.a minilibx-linux/libmlx.a $(OBJ_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) -Llibft -lft -o $(NAME)
 
 clean:
@@ -29,7 +29,6 @@ clean:
 	rm -rf minilibx-linux/obj/
 
 fclean: clean
-	rm fractol
 	rm libft/libft.a
 	rm minilibx-linux/libmlx.a minilibx-linux/libmlx_Linux.a
 
