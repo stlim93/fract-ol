@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:04:53 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/06 19:37:13 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/06 21:52:43 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,21 @@ void	ft_output_guide(void)
 	ft_printf(" ==========================================================\n");
 }
 
-int	ft_detect_fractal(char *s, int argc)
+int	ft_detect_fractal(char *s[], int argc)
 {
-	if (ft_strncmp(s, "mandelbrot", 10) == 0 && argc == 2)
+	if (ft_strncmp(s[1], "mandelbrot", 10) == 0 && argc == 2)
 		return (1);
-	else if (ft_strncmp(s, "mandelbar", 9) == 0 && argc == 2)
+	else if (ft_strncmp(s[1], "mandelbar", 9) == 0 && argc == 2)
 		return (2);
-	else if (ft_strncmp(s, "tricorn", 7) == 0 && argc == 2)
+	else if (ft_strncmp(s[1], "tricorn", 7) == 0 && argc == 2)
 		return (2);
-	else if (ft_strncmp(s, "julia", 5) == 0 && argc == 4)
-		return (3);
+	else if (ft_strncmp(s[1], "julia", 5) == 0 && argc == 4)
+	{
+		if (ft_atof(s[2]) && ft_atof(s[3]))
+			return (3);
+		else
+			exit(EXIT_FAILURE);
+	}
 	else
 		exit(EXIT_FAILURE);
 }
@@ -72,7 +77,7 @@ int	main(int argc, char *argv[])
 
 	ft_output_guide();
 	if (argc == 2 || argc == 4)
-		type = ft_detect_fractal(argv[1], argc);
+		type = ft_detect_fractal(argv, argc);
 	else
 		exit(EXIT_FAILURE);
 	d = ft_init_mlx();
