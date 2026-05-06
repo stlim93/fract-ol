@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 01:25:33 by stelim            #+#    #+#             */
-/*   Updated: 2026/03/30 22:57:45 by stelim           ###   ########.fr       */
+/*   Created: 2025/12/14 22:45:57 by stelim            #+#    #+#             */
+/*   Updated: 2025/12/21 17:28:05 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*last;
+# include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	last = ft_lstlast(*lst);
-	last->next = new;
-}
+int	ft_printf_int(int i);
+int	ft_printf_char(unsigned char c);
+int	ft_printf_str(const char *s);
+int	ft_printf_pct(void);
+int	ft_printf_hex(unsigned int n, const char x);
+int	ft_printf_mem(void *ptr);
+int	ft_printf_uint(unsigned int ui);
+int	ft_printf(const char *s, ...);
+
+#endif
