@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <math.h>
+# include <limits.h>
 # include <X11/keysymdef.h>
 # include <X11/X.h>
 # include "../includes/ft_printf.h"
@@ -79,6 +80,7 @@ void			pixel_to_image(t_data *data, int x, int y, int color);
 
 // From atof.c
 double			ft_atof(char *s);
+void			ft_output_error(void);
 
 // From colour.c
 unsigned int	create_rgb(int iter, double radius);
