@@ -83,7 +83,9 @@ int	ft_detect_fractal(char *s[], int argc)
 	else if (ft_strncmp(s[1], "julia", 5) == 0 && argc == 4)
 	{
 		ft_check_float(s[2]);
+		ft_atof(s[2]);
 		ft_check_float(s[3]);
+		ft_atof(s[3]);
 		return (3);
 	}
 	else
