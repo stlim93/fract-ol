@@ -6,7 +6,7 @@
 /*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 17:04:53 by stelim            #+#    #+#             */
-/*   Updated: 2026/05/06 21:52:43 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/07 20:16:25 by stelim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,27 @@ t_data	ft_init_mlx(void)
 	d.img_ptr = mlx_new_image(d.mlx_ptr, WIDTH, HEIGHT);
 	d.img_data = mlx_get_data_addr(d.img_ptr, &d.bpp, &d.size_line, &d.endian);
 	return (d);
+}
+
+void	ft_check_float(char *string)
+{
+	char	**s;
+	int		idx;
+
+	idx = 0;
+	if (ft_strchr(string, ' ') != NULL)
+		ft_output_error();
+	else if (ft_strrchr(string, ' ') != NULL)
+		ft_output_error();
+	s = ft_split(string, ' ');
+	while (s[idx])
+	{
+		free(s[idx]);
+		idx++;
+	}
+	free(s);
+	if (idx != 1)
+		ft_output_error();
 }
 
 void	ft_output_guide(void)
@@ -61,10 +82,9 @@ int	ft_detect_fractal(char *s[], int argc)
 		return (2);
 	else if (ft_strncmp(s[1], "julia", 5) == 0 && argc == 4)
 	{
-		if (ft_atof(s[2]) && ft_atof(s[3]))
-			return (3);
-		else
-			exit(EXIT_FAILURE);
+		ft_check_float(s[2]);
+		ft_check_float(s[3]);
+		return (3);
 	}
 	else
 		exit(EXIT_FAILURE);
