@@ -6,11 +6,9 @@ SRC_DIR		= src
 OBJ_DIR		= obj
 MLX_DIR		= ./minilibx-linux
 
+# Fractol files
 SRCS		= $(SRC_DIR)/*.c
-# OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 FILES := $(shell find $(SRC_DIR) -name "*.c")
-
-# To convert all c files to object files
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(FILES))
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
