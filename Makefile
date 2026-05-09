@@ -34,7 +34,7 @@ clean:
 	rm -rf libft/obj/ minilibx-linux/obj/ obj/
 
 fclean: clean
-	rm $(NAME) libft/libft.a minilibx-linux/libmlx.a minilibx-linux/libmlx_Linux.a
+	rm -f $(NAME) libft/libft.a minilibx-linux/libmlx.a minilibx-linux/libmlx_Linux.a
 
 re:		fclean $(NAME)
 
