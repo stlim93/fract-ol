@@ -31,14 +31,10 @@ $(NAME) : libft/libft.a minilibx-linux/libmlx.a $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) -Llibft -lft -o $(NAME)
 
 clean:
-	rm -rf libft/obj/
-	rm -rf minilibx-linux/obj/
-	rm -rf obj/
+	rm -rf libft/obj/ minilibx-linux/obj/ obj/
 
 fclean: clean
-	rm $(NAME)
-	rm libft/libft.a
-	rm minilibx-linux/libmlx.a minilibx-linux/libmlx_Linux.a
+	rm $(NAME) libft/libft.a minilibx-linux/libmlx.a minilibx-linux/libmlx_Linux.a
 
 re:		fclean $(NAME)
 
