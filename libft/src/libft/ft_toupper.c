@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stelim <stelim@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: steve <steve@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 07:25:23 by stelim            #+#    #+#             */
-/*   Updated: 2025/11/29 22:34:30 by stelim           ###   ########.fr       */
+/*   Updated: 2026/05/09 21:53:14 by steve            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_toupper(int c)
 {
-	if (c >= 97 & c <= 122)
+	if (c >= 97 && c <= 122)
 		return (c - 32);
 	else
 		return (c);
